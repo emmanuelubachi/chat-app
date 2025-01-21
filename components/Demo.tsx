@@ -66,90 +66,146 @@ export function ChatMessageListDemo() {
   };
 
   return (
-    <div className="h-full w-full border bg-background rounded-lg flex flex-col">
-      <div className="flex-1 overflow-hidden">
-        <ChatMessageList>
-          {messages.map((message) => (
-            <ChatBubble
-              key={message.id}
-              variant={message.sender === "user" ? "sent" : "received"}
-            >
-              <ChatBubbleAvatar
-                className="h-8 w-8 shrink-0"
-                src={
-                  message.sender === "user"
-                    ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&q=80&crop=faces&fit=crop"
-                    : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
-                }
-                fallback={message.sender === "user" ? "US" : "AI"}
-              />
-              <ChatBubbleMessage
-                variant={message.sender === "user" ? "sent" : "received"}
-              >
-                {message.content}
-              </ChatBubbleMessage>
-            </ChatBubble>
-          ))}
+    <>
+      {messages.length > 0 ? (
+        <div className="h-full w-full bg-background rounded-lg flex flex-col">
+          <div className="flex-1 overflow-hidden">
+            <ChatMessageList>
+              {messages.map((message) => (
+                <ChatBubble
+                  key={message.id}
+                  variant={message.sender === "user" ? "sent" : "received"}
+                >
+                  <ChatBubbleAvatar
+                    className="h-8 w-8 shrink-0"
+                    src={
+                      message.sender === "user"
+                        ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&q=80&crop=faces&fit=crop"
+                        : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
+                    }
+                    fallback={message.sender === "user" ? "US" : "AI"}
+                  />
+                  <ChatBubbleMessage
+                    variant={message.sender === "user" ? "sent" : "received"}
+                  >
+                    {message.content}
+                  </ChatBubbleMessage>
+                </ChatBubble>
+              ))}
 
-          {isLoading && (
-            <ChatBubble variant="received">
-              <ChatBubbleAvatar
-                className="h-8 w-8 shrink-0"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
-                fallback="AI"
-              />
-              <ChatBubbleMessage isLoading />
-            </ChatBubble>
-          )}
-        </ChatMessageList>
-      </div>
-
-      <div className="p-4 border-t">
-        <form
-          onSubmit={handleSubmit}
-          onKeyDown={handleKeyDown}
-          className="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring p-1"
-        >
-          <ChatInput
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-            }}
-            placeholder="Type your message..."
-            className="min-h-12 rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
-          />
-          <div className="flex items-center p-3 pt-0 justify-between">
-            <div className="flex">
-              <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                onClick={handleAttachFile}
-              >
-                <Paperclip className="size-4" />
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                onClick={handleMicrophoneClick}
-              >
-                <Mic className="size-4" />
-              </Button>
-            </div>
-            <Button
-              type="submit"
-              size="sm"
-              disabled={!input.trim() || isLoading}
-              className="ml-auto gap-1.5"
-            >
-              Send
-              <Send className="size-3.5" />
-            </Button>
+              {isLoading && (
+                <ChatBubble variant="received">
+                  <ChatBubbleAvatar
+                    className="h-8 w-8 shrink-0"
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
+                    fallback="AI"
+                  />
+                  <ChatBubbleMessage isLoading />
+                </ChatBubble>
+              )}
+            </ChatMessageList>
           </div>
-        </form>
-      </div>
-    </div>
+
+          <div className="w-full max-w-2xl">
+            <form
+              onSubmit={handleSubmit}
+              onKeyDown={handleKeyDown}
+              className="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring p-1"
+            >
+              <ChatInput
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                }}
+                placeholder="Type your message..."
+                className="min-h-12 rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+              />
+              <div className="flex items-center p-3 pt-0 justify-between">
+                <div className="flex">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    onClick={handleAttachFile}
+                  >
+                    <Paperclip className="size-4" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    onClick={handleMicrophoneClick}
+                  >
+                    <Mic className="size-4" />
+                  </Button>
+                </div>
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={!input.trim() || isLoading}
+                  className="ml-auto gap-1.5"
+                >
+                  Send
+                  <Send className="size-3.5" />
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <div className="h-full w-full flex flex-col justify-center items-center px-4">
+          <h2 className="mb-10 sm:mb-20 text-3xl text-center sm:text-5xl dark:text-white text-black">
+            Ask Lawbot Anything
+          </h2>
+          <div className="w-full max-w-2xl">
+            <form
+              onSubmit={handleSubmit}
+              onKeyDown={handleKeyDown}
+              className="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring p-1"
+            >
+              <ChatInput
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                }}
+                placeholder="Type your message..."
+                className="min-h-12 rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+              />
+              <div className="flex items-center p-3 pt-0 justify-between">
+                <div className="flex">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    onClick={handleAttachFile}
+                  >
+                    <Paperclip className="size-4" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    onClick={handleMicrophoneClick}
+                  >
+                    <Mic className="size-4" />
+                  </Button>
+                </div>
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={!input.trim() || isLoading}
+                  className="ml-auto gap-1.5"
+                >
+                  Send
+                  <Send className="size-3.5" />
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
