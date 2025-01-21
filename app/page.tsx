@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <ModeToggle />
-      <main className="h-screen w-full max-w-3xl mx-auto p-8">
+      <main className="h-screen w-full pt-16 pb-4 mx-auto">
         <ChatMessageListDemo />
       </main>
     </>

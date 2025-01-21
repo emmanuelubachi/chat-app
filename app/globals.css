@@ -64,8 +64,9 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted/70;
   }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -106,7 +106,7 @@ export function ChatMessageListDemo() {
             </ChatMessageList>
           </div>
 
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-3xl mx-auto">
             <form
               onSubmit={handleSubmit}
               onKeyDown={handleKeyDown}
@@ -158,7 +158,7 @@ export function ChatMessageListDemo() {
           <h2 className="mb-10 sm:mb-20 text-3xl text-center sm:text-5xl dark:text-white text-black">
             Ask Lawbot Anything
           </h2>
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-3xl">
             <form
               onSubmit={handleSubmit}
               onKeyDown={handleKeyDown}
@@ -170,7 +170,7 @@ export function ChatMessageListDemo() {
                   setInput(e.target.value);
                 }}
                 placeholder="Type your message..."
-                className="min-h-12 rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+                className="rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
               />
               <div className="flex items-center p-3 pt-0 justify-between">
                 <div className="flex">

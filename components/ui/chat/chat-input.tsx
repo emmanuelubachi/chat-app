@@ -7,7 +7,7 @@ type ChatInputProps = React.ComponentProps<typeof Textarea>;
 
 const ChatInput = ({ className, onChange, ...props }: ChatInputProps) => {
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-    minHeight: 40,
+    minHeight: 60,
     maxHeight: 200,
   });
 
@@ -22,7 +22,7 @@ const ChatInput = ({ className, onChange, ...props }: ChatInputProps) => {
         adjustHeight();
       }}
       className={cn(
-        "px-4 py-3 bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 w-full rounded-md flex items-center h-16 resize-none",
+        "px-4 py-3 h-[60px] bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 w-full rounded-md flex items-center resize-none",
         className
       )}
       {...props}
